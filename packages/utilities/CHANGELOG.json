@@ -2,6 +2,48 @@
   "name": "@uifabric/utilities",
   "entries": [
     {
+      "version": "6.29.0",
+      "tag": "@uifabric/utilities_v6.29.0",
+      "date": "Thu, 31 Jan 2019 20:10:48 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Adding helper functions to get and restore focus elements based on index paths.",
+            "author": "David Zearing <dzearing@microsoft.com>",
+            "commit": "468af6a86a680e882009c7bc33e0956877d3fa26"
+          }
+        ]
+      }
+    },
+    {
+      "version": "6.28.1",
+      "tag": "@uifabric/utilities_v6.28.1",
+      "date": "Fri, 25 Jan 2019 13:38:07 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Updating 'customizable.tsx' to evaluate style functions.",
+            "author": "Humberto Makoto Morimoto Burgos <Humberto.Morimoto@microsoft.com>",
+            "commit": "4585011f2001a2d276525fb64f81ecabfe2316b4"
+          }
+        ]
+      }
+    },
+    {
+      "version": "6.28.0",
+      "tag": "@uifabric/utilities_v6.28.0",
+      "date": "Fri, 11 Jan 2019 05:00:46 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Scroll: use scrollableParent in _preventOverscrolling, allow EventGroup.on to take event options",
+            "author": "kkjeer <kkjeer@wellesley.edu>",
+            "commit": "c9613c6206dd9f13c4712c93e91bcbef46d18169"
+          }
+        ]
+      }
+    },
+    {
       "version": "6.27.2",
       "tag": "@uifabric/utilities_v6.27.2",
       "date": "Tue, 08 Jan 2019 13:34:49 GMT",

@@ -29,7 +29,6 @@ exports[`Component Examples renders DatePicker.WeekNumbers.Example.tsx correctly
     <div
       aria-expanded={false}
       aria-haspopup="true"
-      aria-owns="DatePicker-Callout1"
       role="combobox"
     >
       <div
@@ -48,8 +47,11 @@ exports[`Component Examples renders DatePicker.WeekNumbers.Example.tsx correctly
               padding-top: 0px;
               position: relative;
             }
-            @media screen and (-ms-high-contrast: active){& {
-              border-width: 2px;
+            & input[readonly] {
+              cursor: pointer;
+            }
+            & input::-ms-clear {
+              display: none;
             }
       >
         <div
@@ -66,6 +68,7 @@ exports[`Component Examples renders DatePicker.WeekNumbers.Example.tsx correctly
                   border: 1px solid #a6a6a6;
                   box-shadow: none;
                   box-sizing: border-box;
+                  cursor: text;
                   display: flex;
                   flex-direction: row;
                   height: 32px;
@@ -141,7 +144,6 @@ exports[`Component Examples renders DatePicker.WeekNumbers.Example.tsx correctly
               value=""
             />
             <i
-              aria-hidden={true}
               className=
                   ms-DatePicker-event--without-label
                   msDatePickerDisabled
@@ -352,6 +354,7 @@ exports[`Component Examples renders DatePicker.WeekNumbers.Example.tsx correctly
         className=
             ms-Dropdown-caretDownWrapper
             {
+              cursor: pointer;
               height: 32px;
               line-height: 30px;
               position: absolute;
@@ -360,7 +363,6 @@ exports[`Component Examples renders DatePicker.WeekNumbers.Example.tsx correctly
             }
       >
         <i
-          aria-hidden={true}
           className=
               ms-Dropdown-caretDown
               {

@@ -1,8 +1,6 @@
 import * as React from 'react';
-import { Breakpoints, Responsive, WidthProvider, Layout, Layouts } from 'react-grid-layout';
-import { compactHorizontally } from './DashboardCompaction';
+import { Breakpoints, Responsive, WidthProvider, Layout, Layouts } from 'react-grid-layout-fabric';
 import {
-  IDashboardGridLayoutBaseState,
   IDashboardGridLayoutProps,
   IDashboardGridLayoutStyles,
   IDashboardCardLayout,
@@ -13,7 +11,7 @@ import { classNamesFunction } from 'office-ui-fabric-react/lib/Utilities';
 import { CardSizeToWidthHeight, updateLayoutsFromLayout } from '../../utilities/DashboardGridLayoutUtils';
 
 // These require the style-loader and css-loader rules from webpack
-require('react-grid-layout/css/styles.css');
+require('react-grid-layout-fabric/css/styles.css');
 require('react-resizable/css/styles.css');
 require('./DashboardGridLayout.css');
 
@@ -24,7 +22,7 @@ export interface IDashboardGridLayoutBaseProps extends IDashboardGridLayoutProps
   onLayoutChange?(currentLayout: Layout[], allLayouts: Layouts): void;
 }
 
-export class DashboardGridLayoutBase extends React.Component<IDashboardGridLayoutBaseProps, IDashboardGridLayoutBaseState> {
+export class DashboardGridLayoutBase extends React.Component<IDashboardGridLayoutBaseProps, {}> {
   /** The default props used for React-Grid-Layout */
   public static defaultProps: Partial<IDashboardGridLayoutBaseProps> = {
     rowHeight: 56,
@@ -46,27 +44,12 @@ export class DashboardGridLayoutBase extends React.Component<IDashboardGridLayou
     margin: [24, 24]
   };
 
-  public state: IDashboardGridLayoutBaseState = {};
-
-  public static getDerivedStateFromProps(
-    nextProps: Readonly<IDashboardGridLayoutBaseProps>
-  ): Partial<IDashboardGridLayoutBaseState> | null {
-    const layouts = _createLayout(nextProps, nextProps.layout);
-    if (!layouts) {
-      return null;
-    }
-    return {
-      layouts: _getCompactedLayouts(nextProps, layouts)
-    };
-  }
-
   public render(): JSX.Element {
     const getClassNames = classNamesFunction<IDashboardGridLayoutProps, IDashboardGridLayoutStyles>();
     const classNames = getClassNames(getStyles!, {});
-    const { layouts } = this.state;
 
     return (
-      <div dir="ltr">
+      <div dir="ltr" role={this.props.role ? this.props.role : 'region'} aria-labelledby={this.props.DGLAriaLabelledby}>
         <ResponsiveReactGridLayout
           isDraggable={this.props.isDraggable || true}
           breakpoints={this.props.breakpoints}
@@ -76,7 +59,7 @@ export class DashboardGridLayoutBase extends React.Component<IDashboardGridLayou
           containerPadding={[0, 0]}
           isResizable={this.props.isResizable || false}
           rowHeight={this.props.rowHeight}
-          layouts={layouts}
+          layouts={_createLayout(this.props, this.props.layout)}
           verticalCompact={true}
           onDrag={this.props.onDrag}
           onDragStart={this.props.onDragStart}
@@ -85,39 +68,12 @@ export class DashboardGridLayoutBase extends React.Component<IDashboardGridLayou
           dragApiRef={this.props.dragApi}
           onWidthChange={this.props.onWidthChange}
           {...this.props}
-          onLayoutChange={this._onLayoutChanged}
         >
           {this.props.children}
         </ResponsiveReactGridLayout>
       </div>
     );
   }
-
-  private _onLayoutChanged = (currentLayout: Layout[], allLayouts: Layouts) => {
-    if (this.state.layouts) {
-      // todo: support other breakpoints
-      const layouts: Layouts = {
-        lg: this.state.layouts.lg ? currentLayout : undefined
-      };
-      this.setState({
-        layouts: _getCompactedLayouts(this.props, layouts)
-      });
-    }
-
-    if (this.props.onLayoutChange) {
-      this.props.onLayoutChange(currentLayout, allLayouts);
-    }
-  };
-}
-
-function _getCompactedLayouts(props: IDashboardGridLayoutBaseProps, layouts: Layouts): Layouts | undefined {
-  if (!layouts) {
-    return undefined;
-  }
-  // todo: support other breakpoints
-  return {
-    lg: layouts.lg ? compactHorizontally(layouts.lg, props.cols!.lg) : undefined
-  } as Layouts;
 }
 
 function _createLayoutFromProp(props: IDashboardGridLayoutBaseProps, layoutProp: IDashboardCardLayout): Layout {

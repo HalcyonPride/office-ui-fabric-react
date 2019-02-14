@@ -1,6 +1,27 @@
 # Change Log - @uifabric/utilities
 
-This log was last generated on Tue, 08 Jan 2019 13:34:49 GMT and should not be manually modified.
+This log was last generated on Thu, 31 Jan 2019 20:10:48 GMT and should not be manually modified.
+
+## 6.29.0
+Thu, 31 Jan 2019 20:10:48 GMT
+
+### Minor changes
+
+- Adding helper functions to get and restore focus elements based on index paths.
+
+## 6.28.1
+Fri, 25 Jan 2019 13:38:07 GMT
+
+### Patches
+
+- Updating 'customizable.tsx' to evaluate style functions.
+
+## 6.28.0
+Fri, 11 Jan 2019 05:00:46 GMT
+
+### Minor changes
+
+- Scroll: use scrollableParent in _preventOverscrolling, allow EventGroup.on to take event options
 
 ## 6.27.2
 Tue, 08 Jan 2019 13:34:49 GMT

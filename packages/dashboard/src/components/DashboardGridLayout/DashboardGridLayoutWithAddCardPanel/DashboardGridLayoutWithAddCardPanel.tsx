@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { createDragApiRef, Layout } from 'react-grid-layout';
+import { createDragApiRef, Layout } from 'react-grid-layout-fabric';
 import { BaseComponent } from 'office-ui-fabric-react/lib/Utilities';
 import {
   IDashboardGridLayoutWithAddCardPanelProps,
@@ -106,6 +106,7 @@ export class DashboardGridLayoutWithAddCardPanel extends BaseComponent<
             onDismiss={this._onPanelDismiss}
             draggingCardCallback={this._draggingCardCallback}
             initialX={this.state.selectedCardInitialX}
+            emptyPanelMessage={addCardPanelProps ? addCardPanelProps.emptyPanelMessage : undefined}
           />
           <div className="dashboardContainerClassName">
             <DashboardGridSectionLayout
@@ -188,6 +189,11 @@ export class DashboardGridLayoutWithAddCardPanel extends BaseComponent<
           layout: newLayout,
           cardNodes
         });
+        if (Object.is(newLayout, this.state.layout)) {
+          if (this.props.onLayoutChange) {
+            this.props.onLayoutChange(newLayout, cardSelected[0].id);
+          }
+        }
       }
     } else {
       const newLayout: DashboardGridBreakpointLayouts = { lg: [] };
@@ -215,7 +221,9 @@ export class DashboardGridLayoutWithAddCardPanel extends BaseComponent<
         };
         newLayout.lg!.push(itemLayout);
       });
-      if (newLayout !== this.state.layout) {
+
+      // for object comparision using Object.id method
+      if (Object.is(newLayout, this.state.layout)) {
         if (this.props.onLayoutChange) {
           this.props.onLayoutChange(newLayout);
         }
@@ -257,6 +265,9 @@ export class DashboardGridLayoutWithAddCardPanel extends BaseComponent<
         layout,
         cardNodes
       });
+      if (this.props.onLayoutChange) {
+        this.props.onLayoutChange(layout, cardSelected[0].id);
+      }
       // scroll to the card that was added to the layout
       this._async.setTimeout(() => {
         if (document.getElementById(cardId + 'dglCard')) {

@@ -444,6 +444,11 @@
     {
       "packageName": "@uifabric/azure-themes",
       "projectFolder": "packages/azure-themes",
+      "versionPolicyName": "lockedMajor"
+    },
+    {
+      "packageName": "@uifabric/pr-deploy-site",
+      "projectFolder": "apps/pr-deploy-site",
       "shouldPublish": false
     }
   ]

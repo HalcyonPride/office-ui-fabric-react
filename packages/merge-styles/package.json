@@ -1,6 +1,6 @@
 {
   "name": "@uifabric/merge-styles",
-  "version": "6.15.0",
+  "version": "6.15.2",
   "description": "Office UI Fabric style loading utilities.",
   "main": "lib-commonjs/index.js",
   "module": "lib/index.js",
@@ -15,6 +15,7 @@
   "license": "MIT",
   "scripts": {
     "build": "node ../../scripts/just.js build",
+    "just": "node ../../scripts/just.js",
     "clean": "node ../../scripts/just.js clean",
     "code-style": "node ../../scripts/just.js code-style",
     "start-test": "node ../../scripts/just.js jest-watch",
@@ -23,6 +24,7 @@
   "disabledTasks": [
     "copy",
     "sass",
+    "build-codepen-examples",
     "karma"
   ],
   "devDependencies": {

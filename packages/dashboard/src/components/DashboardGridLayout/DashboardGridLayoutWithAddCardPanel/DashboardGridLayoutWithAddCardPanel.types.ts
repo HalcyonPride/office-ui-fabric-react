@@ -42,7 +42,7 @@ export interface IDashboardGridLayoutWithAddCardPanelProps extends IBaseProps {
   /**
    * The callback being called each time after a layout change
    */
-  onLayoutChange?: (newLayout: DashboardGridBreakpointLayouts) => void;
+  onLayoutChange?: (newLayout: DashboardGridBreakpointLayouts, cardId?: string) => void;
 
   /**
    * The callback method fired when the add card panel is dismissed
@@ -67,6 +67,11 @@ export interface IAddCardPanelProps {
    * The aria label for the panel's close button
    */
   panelCloseButtonAriaLabel?: string;
+
+  /**
+   * Message shown in add card panel empty state
+   */
+  emptyPanelMessage?: string;
 }
 
 export interface IDashboardGridLayoutWithAddCardPanelState {

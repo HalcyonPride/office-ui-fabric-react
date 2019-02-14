@@ -109,7 +109,6 @@ exports[`Component Examples renders ContextualMenu.Directional.Example.tsx corre
               }
         >
           <i
-            aria-hidden={true}
             className=
                 ms-Checkbox-checkmark
                 {
@@ -326,6 +325,7 @@ exports[`Component Examples renders ContextualMenu.Directional.Example.tsx corre
           className=
               ms-Dropdown-caretDownWrapper
               {
+                cursor: pointer;
                 height: 32px;
                 line-height: 30px;
                 position: absolute;
@@ -334,7 +334,6 @@ exports[`Component Examples renders ContextualMenu.Directional.Example.tsx corre
               }
         >
           <i
-            aria-hidden={true}
             className=
                 ms-Dropdown-caretDown
                 {
@@ -477,7 +476,6 @@ exports[`Component Examples renders ContextualMenu.Directional.Example.tsx corre
           </div>
         </div>
         <i
-          aria-hidden={true}
           className=
               ms-Button-menuIcon
               {
