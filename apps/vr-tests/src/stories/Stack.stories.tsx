@@ -3,9 +3,7 @@ import * as React from 'react';
 import Screener from 'screener-storybook/src/screener';
 import { storiesOf } from '@storybook/react';
 import { FabricDecoratorFullWidth } from '../utilities';
-import { Stack } from '@uifabric/experiments/lib/Stack';
-import { Fabric } from 'office-ui-fabric-react';
-import { mergeStyleSets, DefaultPalette, IStyle } from 'office-ui-fabric-react/lib/Styling';
+import { Fabric, mergeStyleSets, DefaultPalette, IStyle, Stack } from 'office-ui-fabric-react';
 
 const rootStyles = {
   background: DefaultPalette.themeTertiary
@@ -108,7 +106,7 @@ storiesOf('Stack', module)
   ))
   .addStory('Vertical Stack - Gap', () => (
     <Fabric>
-      <Stack {...defaultProps} gap={10} />
+      <Stack {...defaultProps} tokens={{ childrenGap: 10 }} />
     </Fabric>
   ))
   .addStory('Vertical Stack - Vertically centered', () => (
@@ -153,7 +151,7 @@ storiesOf('Stack', module)
   .addStory(
     'Vertical Stack - Item alignments',
     () => (
-      <Stack {...defaultProps} gap={10}>
+      <Stack {...defaultProps} tokens={{ childrenGap: 10 }}>
         <Stack.Item align="auto" className={styles.item}>
           Auto-aligned item
         </Stack.Item>
@@ -177,7 +175,7 @@ storiesOf('Stack', module)
     { rtl: true }
   )
   .addStory('Vertical Stack - Growing items', () => (
-    <Stack {...defaultProps} gap={10} className={styles.fixedHeight}>
+    <Stack {...defaultProps} tokens={{ childrenGap: 10 }} className={styles.fixedHeight}>
       <Stack.Item grow={3} className={styles.item}>
         Grow is 3
       </Stack.Item>
@@ -190,7 +188,7 @@ storiesOf('Stack', module)
     </Stack>
   ))
   .addStory('Vertical Stack - Shrinking items', () => (
-    <Stack {...defaultProps} gap={10} className={styles.fixedHeight}>
+    <Stack {...defaultProps} tokens={{ childrenGap: 10 }} className={styles.fixedHeight}>
       <Stack.Item className={styles.verticalShrinkItem}>1</Stack.Item>
       <Stack.Item disableShrink className={styles.verticalShrinkItem}>
         2 (does not shrink)
@@ -204,7 +202,12 @@ storiesOf('Stack', module)
     'Vertical Stack - Wrap',
     () => (
       <Fabric>
-        <Stack {...defaultProps} gap={'10 0'} wrap className={styles.fixedHeight}>
+        <Stack
+          {...defaultProps}
+          tokens={{ childrenGap: '10 0' }}
+          wrap
+          className={styles.fixedHeight}
+        >
           <span className={styles.boxItem}>1</span>
           <span className={styles.boxItem}>2</span>
           <span className={styles.boxItem}>3</span>
@@ -227,7 +230,7 @@ storiesOf('Stack', module)
   )
   .addStory('Vertical Stack - Box shadow around items', () => (
     <Fabric>
-      <Stack {...defaultProps} gap={25}>
+      <Stack {...defaultProps} tokens={{ childrenGap: 25 }}>
         <span className={styles.shadowItem}>1</span>
         <span className={styles.shadowItem}>2</span>
         <span className={styles.shadowItem}>3</span>
@@ -263,7 +266,7 @@ storiesOf('Stack', module)
     'Horizontal Stack - Gap',
     () => (
       <Fabric>
-        <Stack horizontal {...defaultProps} gap={10} />
+        <Stack horizontal {...defaultProps} tokens={{ childrenGap: 10 }} />
       </Fabric>
     ),
     { rtl: true }
@@ -310,7 +313,12 @@ storiesOf('Stack', module)
   .addStory(
     'Horizontal Stack - Item alignments',
     () => (
-      <Stack horizontal {...defaultProps} gap={10} className={styles.fixedHeight}>
+      <Stack
+        horizontal
+        {...defaultProps}
+        tokens={{ childrenGap: 10 }}
+        className={styles.fixedHeight}
+      >
         <Stack.Item align="auto" className={styles.item}>
           Auto-aligned item
         </Stack.Item>
@@ -334,7 +342,7 @@ storiesOf('Stack', module)
     { rtl: true }
   )
   .addStory('Horizontal Stack - Growing items', () => (
-    <Stack horizontal {...defaultProps} gap={10}>
+    <Stack horizontal {...defaultProps} tokens={{ childrenGap: 10 }}>
       <Stack.Item grow={3} className={styles.item}>
         Grow is 3
       </Stack.Item>
@@ -347,7 +355,7 @@ storiesOf('Stack', module)
     </Stack>
   ))
   .addStory('Horizontal Stack - Shrinking items', () => (
-    <Stack horizontal {...defaultProps} gap={10}>
+    <Stack horizontal {...defaultProps} tokens={{ childrenGap: 10 }}>
       <Stack.Item className={styles.horizontalShrinkItem}>1</Stack.Item>
       <Stack.Item disableShrink className={styles.horizontalShrinkItem}>
         2 (does not shrink)
@@ -363,7 +371,7 @@ storiesOf('Stack', module)
     'Horizontal Stack - Wrap',
     () => (
       <Fabric>
-        <Stack horizontal {...defaultProps} gap={10} wrap>
+        <Stack horizontal {...defaultProps} tokens={{ childrenGap: 10 }} wrap>
           <span className={styles.boxItem}>1</span>
           <span className={styles.boxItem}>2</span>
           <span className={styles.boxItem}>3</span>
@@ -400,7 +408,7 @@ storiesOf('Stack', module)
   )
   .addStory('Horizontal Stack - Wrap with specified vertical gap', () => (
     <Fabric>
-      <Stack horizontal {...defaultProps} wrap gap={'40 10'}>
+      <Stack horizontal {...defaultProps} wrap tokens={{ childrenGap: '40 10' }}>
         <span className={styles.boxItem}>1</span>
         <span className={styles.boxItem}>2</span>
         <span className={styles.boxItem}>3</span>
@@ -435,7 +443,7 @@ storiesOf('Stack', module)
   ))
   .addStory('Horizontal Stack - Box shadow around items', () => (
     <Fabric>
-      <Stack horizontal {...defaultProps} gap={25}>
+      <Stack horizontal {...defaultProps} tokens={{ childrenGap: 25 }}>
         <span className={styles.shadowItem}>1</span>
         <span className={styles.shadowItem}>2</span>
         <span className={styles.shadowItem}>3</span>

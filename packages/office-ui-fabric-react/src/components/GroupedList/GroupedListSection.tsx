@@ -16,7 +16,7 @@ import { GroupFooter } from './GroupFooter';
 
 import { List } from '../../List';
 import { IDragDropOptions } from './../../utilities/dragdrop/interfaces';
-import { assign, css, getId } from '../../Utilities';
+import { css, getId } from '../../Utilities';
 import { IViewport } from '../../utilities/decorators/withViewport';
 import { IListProps } from '../List/index';
 
@@ -66,7 +66,7 @@ export interface IGroupedListSectionProps extends React.ClassAttributes<GroupedL
   items: any[];
 
   /** Optional list props to pass to list renderer.  */
-  listProps?: any;
+  listProps?: IListProps;
 
   /** Rendering callback to render the group items. */
   onRenderCell: (nestingDepth?: number, item?: any, index?: number) => React.ReactNode;
@@ -205,9 +205,9 @@ export class GroupedListSection extends BaseComponent<IGroupedListSectionProps, 
       groupedListId: this._id
     };
 
-    const groupHeaderProps: IGroupHeaderProps = assign({}, headerProps, dividerProps, ariaControlsProps);
-    const groupShowAllProps: IGroupShowAllProps = assign({}, showAllProps, dividerProps);
-    const groupFooterProps: IGroupFooterProps = assign({}, footerProps, dividerProps);
+    const groupHeaderProps: IGroupHeaderProps = { ...headerProps, ...dividerProps, ...ariaControlsProps };
+    const groupShowAllProps: IGroupShowAllProps = { ...showAllProps, ...dividerProps };
+    const groupFooterProps: IGroupFooterProps = { ...footerProps, ...dividerProps };
 
     return (
       <div
@@ -316,7 +316,7 @@ export class GroupedListSection extends BaseComponent<IGroupedListSectionProps, 
     );
   }
 
-  private _renderSubGroup = (subGroup: any, subGroupIndex: number): JSX.Element | null => {
+  private _renderSubGroup = (subGroup: IGroup, subGroupIndex: number): JSX.Element | null => {
     const {
       dragDropEvents,
       dragDropHelper,
@@ -376,7 +376,7 @@ export class GroupedListSection extends BaseComponent<IGroupedListSectionProps, 
     return 1;
   }
 
-  private _getGroupKey(group: any, index: number): string {
+  private _getGroupKey(group: IGroup, index: number): string {
     return 'group-' + (group && group.key ? group.key : String(group.level) + String(index));
   }
 
@@ -399,9 +399,8 @@ export class GroupedListSection extends BaseComponent<IGroupedListSectionProps, 
   /**
    * update groupIsDropping state based on the input value, which is used to change style during drag and drop
    *
-   * @private
-   * @param {boolean} newValue (new isDropping state value)
-   * @param {DragEvent} event (the event trigger dropping state change which can be dragenter, dragleave etc)
+   * @param newValue - new isDropping state value
+   * @param event - the event trigger dropping state change which can be dragenter, dragleave etc
    */
   private _updateDroppingState = (newIsDropping: boolean, event: DragEvent): void => {
     const { isDropping } = this.state;

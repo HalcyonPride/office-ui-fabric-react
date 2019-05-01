@@ -11,6 +11,7 @@ import { IDetailsColumnProps } from 'office-ui-fabric-react/lib/components/Detai
 import { IDetailsHeaderProps, DetailsHeader } from './DetailsHeader';
 import { EventGroup, IRenderFunction } from '../../Utilities';
 import { IDragDropEvents } from './../../utilities/dragdrop/index';
+import { SelectionMode, Selection } from '../../utilities/selection/index';
 
 // Populate mock data for testing
 function mockData(count: number, isColumn: boolean = false, customDivider: boolean = false): any {
@@ -196,8 +197,8 @@ describe('DetailsList', () => {
     expect(component).toBeDefined();
     (component as IDetailsList).focusIndex(2);
     setTimeout(() => {
-      expect(document.activeElement.querySelector('[data-automationid=DetailsRowCell]')!.textContent).toEqual('2');
-      expect(document.activeElement.className.split(' ')).toContain('ms-DetailsRow');
+      expect((document.activeElement as HTMLElement).querySelector('[data-automationid=DetailsRowCell]')!.textContent).toEqual('2');
+      expect((document.activeElement as HTMLElement).className.split(' ')).toContain('ms-DetailsRow');
     }, 0);
     jest.runOnlyPendingTimers();
   });
@@ -254,9 +255,11 @@ describe('DetailsList', () => {
     };
 
     const container = document.createElement('div');
+    const items = mockData(5);
+    const columns = mockData(5, true);
 
     ReactDOM.render(
-      <DetailsListBase columns={mockData(5, true)} skipViewportMeasures={true} items={mockData(5)} dragDropEvents={_dragDropEvents} />,
+      <DetailsListBase columns={columns} skipViewportMeasures={true} items={items} dragDropEvents={_dragDropEvents} />,
       container
     );
 
@@ -270,7 +273,7 @@ describe('DetailsList', () => {
     expect(_dragDropEvents2.onDragStart).toHaveBeenCalledTimes(0);
 
     ReactDOM.render(
-      <DetailsListBase columns={mockData(5, true)} skipViewportMeasures={true} items={mockData(5)} dragDropEvents={_dragDropEvents} />,
+      <DetailsListBase columns={columns} skipViewportMeasures={true} items={items} dragDropEvents={_dragDropEvents} />,
       container
     );
 
@@ -283,7 +286,7 @@ describe('DetailsList', () => {
     expect(_dragDropEvents2.onDragStart).toHaveBeenCalledTimes(0);
 
     ReactDOM.render(
-      <DetailsListBase columns={mockData(5, true)} skipViewportMeasures={true} items={mockData(5)} dragDropEvents={_dragDropEvents2} />,
+      <DetailsListBase columns={columns} skipViewportMeasures={true} items={items} dragDropEvents={_dragDropEvents2} />,
       container
     );
 
@@ -327,24 +330,24 @@ describe('DetailsList', () => {
     expect(component).toBeDefined();
     (component as IDetailsList).focusIndex(3);
     setTimeout(() => {
-      expect(document.activeElement.querySelector('[data-automationid=DetailsRowCell]')!.textContent).toEqual('3');
-      expect(document.activeElement.className.split(' ')).toContain('ms-DetailsRow');
+      expect((document.activeElement as HTMLElement).querySelector('[data-automationid=DetailsRowCell]')!.textContent).toEqual('3');
+      expect((document.activeElement as HTMLElement).className.split(' ')).toContain('ms-DetailsRow');
     }, 0);
     jest.runOnlyPendingTimers();
 
     // Set element visibility manually as a test workaround
     (component as IDetailsList).focusIndex(4);
     setTimeout(() => {
-      (document.activeElement.children[1] as any).isVisible = true;
-      (document.activeElement.children[1].children[0] as any).isVisible = true;
-      (document.activeElement.children[1].children[0].children[0] as any).isVisible = true;
+      ((document.activeElement as HTMLElement).children[1] as any).isVisible = true;
+      ((document.activeElement as HTMLElement).children[1].children[0] as any).isVisible = true;
+      ((document.activeElement as HTMLElement).children[1].children[0].children[0] as any).isVisible = true;
     }, 0);
 
     jest.runOnlyPendingTimers();
     (component as IDetailsList).focusIndex(4, true);
     setTimeout(() => {
-      expect(document.activeElement.textContent).toEqual('4');
-      expect(document.activeElement.className.split(' ')).toContain('test-column');
+      expect((document.activeElement as HTMLElement).textContent).toEqual('4');
+      expect((document.activeElement as HTMLElement).className.split(' ')).toContain('test-column');
     }, 0);
     jest.runOnlyPendingTimers();
   });
@@ -381,8 +384,8 @@ describe('DetailsList', () => {
     // verify that focusedItemIndex is reset to 0 and 0th row is focused
     setTimeout(() => {
       expect(component.state.focusedItemIndex).toEqual(0);
-      expect(document.activeElement.querySelector('[data-automationid=DetailsRowCell]')!.textContent).toEqual('0');
-      expect(document.activeElement.className.split(' ')).toContain('ms-DetailsRow');
+      expect((document.activeElement as HTMLElement).querySelector('[data-automationid=DetailsRowCell]')!.textContent).toEqual('0');
+      expect((document.activeElement as HTMLElement).className.split(' ')).toContain('ms-DetailsRow');
     }, 0);
     jest.runOnlyPendingTimers();
   });
@@ -446,5 +449,30 @@ describe('DetailsList', () => {
     );
 
     expect(onRenderColumnHeaderTooltipMock).toHaveBeenCalledTimes(NUM_COLUMNS);
+  });
+
+  it('invokes optional onRenderCheckbox callback to customize checkbox rendering when provided', () => {
+    const onRenderCheckboxMock = jest.fn();
+    const selection = new Selection();
+    mount(
+      <DetailsList
+        items={mockData(2)}
+        skipViewportMeasures={true}
+        // tslint:disable-next-line:jsx-no-lambda
+        onShouldVirtualize={() => false}
+        onRenderCheckbox={onRenderCheckboxMock}
+        checkboxVisibility={CheckboxVisibility.always}
+        selectionMode={SelectionMode.multiple}
+        selection={selection}
+      />
+    );
+
+    expect(onRenderCheckboxMock).toHaveBeenCalledTimes(3);
+    expect(onRenderCheckboxMock.mock.calls[2][0]).toEqual({ checked: false });
+
+    selection.setAllSelected(true);
+
+    expect(onRenderCheckboxMock).toHaveBeenCalledTimes(6);
+    expect(onRenderCheckboxMock.mock.calls[5][0]).toEqual({ checked: true });
   });
 });

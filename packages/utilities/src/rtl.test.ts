@@ -1,4 +1,4 @@
-import { setSSR } from './dom';
+import { setSSR } from './dom/setSSR';
 
 describe('rtl', () => {
   const { getRTL, setRTL } = require('./rtl');
@@ -64,5 +64,20 @@ describe('getRTL', () => {
   it('falls back to rtl dir attribute on documentElement', () => {
     document.documentElement.setAttribute('dir', 'rtl');
     expect(RTL.getRTL()).toBe(true);
+  });
+
+  it('does not cause exception with null body element', () => {
+    const DOM = require('./dom/getDocument');
+    jest.spyOn(DOM, 'getDocument').mockImplementation(() => {
+      return {
+        documentElement: document.documentElement,
+        body: null
+      };
+    });
+
+    document.documentElement.setAttribute('dir', 'rtl');
+    expect(RTL.getRTL()).toBe(true);
+
+    jest.restoreAllMocks();
   });
 });

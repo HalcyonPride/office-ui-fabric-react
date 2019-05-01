@@ -13,6 +13,7 @@ import { CompoundButtonStyles } from './styles/CompoundButton.styles';
 import { ContextualMenuStyles } from './styles/ContextualMenu.styles';
 import { DatePickerStyles } from './styles/DatePicker.styles';
 import { DefaultButtonStyles } from './styles/DefaultButton.styles';
+import { DetailsColumnStyles } from './styles/DetailsColumn.styles';
 import { DialogContentStyles, DialogFooterStyles } from './styles/Dialog.styles';
 import { DropdownStyles } from './styles/Dropdown.styles';
 import { ExpandingCardStyles, PlainCardStyles } from './styles/HoverCard.styles';
@@ -21,6 +22,7 @@ import { IconButtonStyles } from './styles/IconButton.styles';
 import { LabelStyles } from './styles/Label.styles';
 import { LinkStyles } from './styles/Link.styles';
 import { ModalStyles } from './styles/Modal.styles';
+import { PanelStyles } from './styles/Panel.styles';
 import { PeoplePickerItemStyles } from './styles/PeoplePicker.styles';
 import { PersonaStyles } from './styles/Persona.styles';
 import { PivotStyles } from './styles/Pivot.styles';
@@ -30,7 +32,7 @@ import { SliderStyles } from './styles/Slider.styles';
 import { SpinButtonStyles } from './styles/SpinButton.styles';
 import { SuggestionItemStyles, SuggestionsStyles } from './styles/PickerSuggestions.styles';
 import { TagItemStyles } from './styles/TagPicker.styles';
-import { TeachingBubbleStyles, TeachingBubbleContentStyles } from './styles/TeachingBubble.styles';
+import { TeachingBubbleStyles } from './styles/TeachingBubble.styles';
 import { TextFieldStyles } from './styles/TextField.styles';
 import { ToggleStyles } from './styles/Toggle.styles';
 
@@ -91,6 +93,9 @@ export const FluentStyles: any = {
   DefaultButton: {
     styles: DefaultButtonStyles
   },
+  DetailsColumn: {
+    styles: DetailsColumnStyles
+  },
   DetailsRow: {
     styles: DetailsRowStyles
   },
@@ -118,11 +123,14 @@ export const FluentStyles: any = {
   Link: {
     styles: LinkStyles
   },
-  ListPeoplePicker: {
+  ListPeoplePickerBase: {
     styles: BasePickerStyles
   },
   Modal: {
     styles: ModalStyles
+  },
+  Panel: {
+    styles: PanelStyles
   },
   NormalPeoplePicker: {
     styles: BasePickerStyles
@@ -167,7 +175,7 @@ export const FluentStyles: any = {
     styles: TeachingBubbleStyles
   },
   TeachingBubbleContent: {
-    styles: TeachingBubbleContentStyles
+    styles: TeachingBubbleStyles
   },
   TextField: {
     styles: TextFieldStyles

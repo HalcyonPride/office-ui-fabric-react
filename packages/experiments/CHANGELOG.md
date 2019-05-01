@@ -1,6 +1,278 @@
 # Change Log - @uifabric/experiments
 
-This log was last generated on Wed, 13 Feb 2019 13:36:45 GMT and should not be manually modified.
+This log was last generated on Tue, 30 Apr 2019 12:31:36 GMT and should not be manually modified.
+
+## 6.75.0
+Tue, 30 Apr 2019 12:31:36 GMT
+
+### Minor changes
+
+- Adding a new Microfeedback component
+
+### Patches
+
+-  Use new getFocusStyle signature
+
+## 6.74.2
+Fri, 19 Apr 2019 12:33:02 GMT
+
+### Patches
+
+- TilesList: replaces the imports of Shimmer from experiments package with the one from OUFR.
+
+## 6.74.1
+Thu, 18 Apr 2019 12:31:50 GMT
+
+### Patches
+
+- Button: Removing 'undefined' from 'cursor' token definition.
+
+## 6.74.0
+Wed, 17 Apr 2019 12:33:35 GMT
+
+### Minor changes
+
+- Button: Add focus() call in IButton interface.
+
+### Patches
+
+- Button: Renaming test files because they were testing the component and not only the view and changing menu in examples and tests from render functions to menuProps.
+- Button: Adding overview, dos and don'ts documentation
+- Run prettier on all files
+
+## 6.73.0
+Tue, 16 Apr 2019 12:32:59 GMT
+
+### Minor changes
+
+- Button: Creating CommandBarButton, IconButton and MessageBarButton variants.
+
+### Patches
+
+- Sidebar: update example card styling approach
+
+## 6.72.0
+Fri, 12 Apr 2019 12:34:16 GMT
+
+### Minor changes
+
+-  Button: Creating CompoundButton and BaseButton variants.
+
+### Patches
+
+- Button: Styling fixes to issues found while working on Multiline Ribbon buttons.
+
+## 6.71.0
+Wed, 10 Apr 2019 12:33:17 GMT
+
+### Minor changes
+
+- Button: Creating ActionButton variant and cleaning styling.
+
+## 6.70.0
+Tue, 09 Apr 2019 12:35:20 GMT
+
+### Minor changes
+
+- Button: Adding DefaultButton and PrimaryButton variants.
+
+## 6.69.0
+Mon, 08 Apr 2019 12:37:15 GMT
+
+### Minor changes
+
+- Button: Supporting high contrast in Button, MenuButton and SplitButton.
+
+## 6.68.0
+Fri, 05 Apr 2019 22:09:48 GMT
+
+### Minor changes
+
+- Button: Adding ariaLabel prop and updating examples to fix accessibility issues.
+
+## 6.67.1
+Fri, 05 Apr 2019 12:36:12 GMT
+
+### Patches
+
+- Use styles instead of className on theming example dialog
+
+## 6.67.0
+Wed, 03 Apr 2019 12:38:51 GMT
+
+### Minor changes
+
+- Button: Improvements on Button docs.
+
+### Patches
+
+- Button: Fixing SplitButton styling issues and correctly placing divider.
+
+## 6.66.1
+Tue, 02 Apr 2019 00:38:14 GMT
+
+### Patches
+
+- Use ^ ranges instead of >=
+- add proxy component for experiments/Separator
+
+## 6.66.0
+Mon, 01 Apr 2019 12:37:03 GMT
+
+### Minor changes
+
+- Separator: remove from experiments and promote to OUFR
+
+### Patches
+
+- Updating examples using Stack to use childrenGap token instead of gap prop.
+
+## 6.65.0
+Wed, 27 Mar 2019 12:34:02 GMT
+
+### Minor changes
+
+- Add support for maxRowCount in TilesList
+
+## 6.64.2
+Thu, 21 Mar 2019 12:36:30 GMT
+
+### Patches
+
+- Toggle: Fix invalid references to this object.
+
+## 6.64.1
+Tue, 19 Mar 2019 12:36:45 GMT
+
+### Patches
+
+- fix a bug in the tooltip of last page button in pagination component, experiment package
+
+## 6.64.0
+Fri, 15 Mar 2019 12:34:06 GMT
+
+### Minor changes
+
+- Button: Separating MenuButton and SplitButton as variants to decouple ContextualMenu from Button.
+
+## 6.63.1
+Wed, 13 Mar 2019 00:42:29 GMT
+
+### Patches
+
+- update snapshots to reflect default change in Text
+
+## 6.63.0
+Thu, 07 Mar 2019 13:32:46 GMT
+
+### Minor changes
+
+- Removing Card component from experiments package.
+
+### Patches
+
+- folder cover ux cleaned up
+- Signals: changes icon color of `follow` signal.
+
+## 6.62.2
+Wed, 06 Mar 2019 13:27:18 GMT
+
+### Patches
+
+- Clean up a few imports.
+
+## 6.62.1
+Tue, 05 Mar 2019 17:33:41 GMT
+
+### Patches
+
+- Add type annotations based on update to "styled"
+
+## 6.62.0
+Tue, 05 Mar 2019 04:25:07 GMT
+
+### Minor changes
+
+- remove Announced
+
+### Patches
+
+- add yellowDark as required
+
+## 6.61.0
+Thu, 28 Feb 2019 13:29:07 GMT
+
+### Minor changes
+
+- Card: Exporting Card from experiments.
+
+## 6.60.0
+Tue, 26 Feb 2019 13:31:28 GMT
+
+### Minor changes
+
+- move Text component from experiments -> OUFR
+
+## 6.59.2
+Mon, 25 Feb 2019 13:31:08 GMT
+
+### Patches
+
+- Stack: Making doc block in `Stack.ts` in the `experiments` package so that @deprecated is recognized.
+
+## 6.59.1
+Fri, 22 Feb 2019 13:31:09 GMT
+
+### Patches
+
+- Button: Fixing focus outline and border on circular buttons.
+- Fix RTL handling in SignalsField
+
+## 6.59.0
+Thu, 21 Feb 2019 13:32:08 GMT
+
+### Minor changes
+
+- Button: Adding split property to get Split Buttons.
+- Fluent folder: positioned signal-icon on the right
+
+## 6.58.0
+Wed, 20 Feb 2019 21:57:24 GMT
+
+### Minor changes
+
+- Add render-prop pattern to Tile and FolderCover components
+
+### Patches
+
+- Stack: Reexporting component from experiments package.
+
+## 6.57.1
+Mon, 18 Feb 2019 13:38:29 GMT
+
+### Patches
+
+- to useFluentIcon prop to change top padding in style
+- Text: Fix 'as' prop circular reference
+
+## 6.57.0
+Fri, 15 Feb 2019 17:41:16 GMT
+
+### Minor changes
+
+- Stack: Removing component from experiments package.
+
+## 6.56.0
+Thu, 14 Feb 2019 13:34:54 GMT
+
+### Minor changes
+
+- Card: Adding first prototype for Basic Card component.
+- Experiments: Removed form control
+
+### Patches
+
+- fluent folder cover; updated metadata font color; added yellowDark color variable
 
 ## 6.55.0
 Wed, 13 Feb 2019 13:36:45 GMT

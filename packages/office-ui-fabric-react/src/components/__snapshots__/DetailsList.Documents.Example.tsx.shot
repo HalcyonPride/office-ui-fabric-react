@@ -80,6 +80,7 @@ exports[`Component Examples renders DetailsList.Documents.Example.tsx correctly 
               word-wrap: break-word;
             }
         htmlFor="Toggle0"
+        id="Toggle0-label"
       >
         Enable compact mode
       </label>
@@ -93,6 +94,7 @@ exports[`Component Examples renders DetailsList.Documents.Example.tsx correctly 
       >
         <button
           aria-checked={false}
+          aria-labelledby="Toggle0-label"
           checked={false}
           className=
               ms-Toggle-background
@@ -199,6 +201,8 @@ exports[`Component Examples renders DetailsList.Documents.Example.tsx correctly 
                 padding-top: 0;
                 user-select: none;
               }
+          htmlFor="Toggle0"
+          id="Toggle0-stateText"
         >
           Normal
         </label>
@@ -247,6 +251,7 @@ exports[`Component Examples renders DetailsList.Documents.Example.tsx correctly 
               word-wrap: break-word;
             }
         htmlFor="Toggle1"
+        id="Toggle1-label"
       >
         Enable modal selection
       </label>
@@ -260,6 +265,7 @@ exports[`Component Examples renders DetailsList.Documents.Example.tsx correctly 
       >
         <button
           aria-checked={false}
+          aria-labelledby="Toggle1-label"
           checked={false}
           className=
               ms-Toggle-background
@@ -366,6 +372,8 @@ exports[`Component Examples renders DetailsList.Documents.Example.tsx correctly 
                 padding-top: 0;
                 user-select: none;
               }
+          htmlFor="Toggle1"
+          id="Toggle1-stateText"
         >
           Normal
         </label>
@@ -375,8 +383,13 @@ exports[`Component Examples renders DetailsList.Documents.Example.tsx correctly 
       className=
           ms-TextField
           {
+            -moz-osx-font-smoothing: grayscale;
+            -webkit-font-smoothing: antialiased;
             box-shadow: none;
             box-sizing: border-box;
+            font-family: 'Segoe UI', 'Segoe UI Web (West European)', 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', 'Helvetica Neue', sans-serif;
+            font-size: 14px;
+            font-weight: 400;
             margin-bottom: 20px;
             margin-left: 0;
             margin-right: 30px;
@@ -457,6 +470,8 @@ exports[`Component Examples renders DetailsList.Documents.Example.tsx correctly 
             className=
                 ms-TextField-field
                 {
+                  -moz-osx-font-smoothing: grayscale;
+                  -webkit-font-smoothing: antialiased;
                   background-color: transparent;
                   background: none;
                   border-radius: 0px;
@@ -464,7 +479,9 @@ exports[`Component Examples renders DetailsList.Documents.Example.tsx correctly 
                   box-shadow: none;
                   box-sizing: border-box;
                   color: #333333;
+                  font-family: 'Segoe UI', 'Segoe UI Web (West European)', 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', 'Helvetica Neue', sans-serif;
                   font-size: 14px;
+                  font-weight: 400;
                   margin-bottom: 0px;
                   margin-left: 0px;
                   margin-right: 0px;
@@ -485,11 +502,21 @@ exports[`Component Examples renders DetailsList.Documents.Example.tsx correctly 
                   display: none;
                 }
                 &::placeholder {
+                  -moz-osx-font-smoothing: grayscale;
+                  -webkit-font-smoothing: antialiased;
                   color: #666666;
+                  font-family: 'Segoe UI', 'Segoe UI Web (West European)', 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', 'Helvetica Neue', sans-serif;
+                  font-size: 14px;
+                  font-weight: 400;
                   opacity: 1;
                 }
                 &:-ms-input-placeholder {
+                  -moz-osx-font-smoothing: grayscale;
+                  -webkit-font-smoothing: antialiased;
                   color: #666666;
+                  font-family: 'Segoe UI', 'Segoe UI Web (West European)', 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', 'Helvetica Neue', sans-serif;
+                  font-size: 14px;
+                  font-weight: 400;
                   opacity: 1;
                 }
             id="TextField2"

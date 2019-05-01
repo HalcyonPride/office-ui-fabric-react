@@ -10,10 +10,16 @@ import { IPanelStyleProps } from '../Panel/Panel.types';
 
 export { SelectableOptionMenuItemType as DropdownMenuItemType } from '../../utilities/selectableOption/SelectableOption.types';
 
+/**
+ * {@docCategory Dropdown}
+ */
 export interface IDropdown {
   focus: (shouldOpenOnFocus?: boolean) => void;
 }
 
+/**
+ * {@docCategory Dropdown}
+ */
 export interface IDropdownProps extends ISelectableDroppableTextProps<IDropdown, HTMLDivElement> {
   /**
    * Input placeholder text. Displayed until option is selected.
@@ -45,12 +51,18 @@ export interface IDropdownProps extends ISelectableDroppableTextProps<IDropdown,
   /**
    * Optional custom renderer for placeholder text
    */
+  onRenderPlaceholder?: IRenderFunction<IDropdownProps>;
+
+  /**
+   * Optional custom renderer for placeholder text
+   * @deprecated Use `onRenderPlaceholder`
+   */
   onRenderPlaceHolder?: IRenderFunction<IDropdownProps>;
 
   /**
    * Optional custom renderer for selected option displayed in input
    */
-  onRenderTitle?: IRenderFunction<IDropdownOption | IDropdownOption[]>;
+  onRenderTitle?: IRenderFunction<IDropdownOption[]>;
 
   /**
    * Optional custom renderer for chevron icon
@@ -85,8 +97,9 @@ export interface IDropdownProps extends ISelectableDroppableTextProps<IDropdown,
   /**
    * Keys of the selected items. If you provide this, you must maintain selection
    * state by observing onChange events and passing a new value in when changed.
+   * Passing null in will clear the selection.
    */
-  selectedKeys?: string[] | number[];
+  selectedKeys?: string[] | number[] | null;
 
   /**
    * When multiple items are selected, this still will be used to separate values in
@@ -124,6 +137,9 @@ export interface IDropdownProps extends ISelectableDroppableTextProps<IDropdown,
   styles?: IStyleFunctionOrObject<IDropdownStyleProps, IDropdownStyles>;
 }
 
+/**
+ * {@docCategory Dropdown}
+ */
 export interface IDropdownOption extends ISelectableOption {
   /**
    * Deprecated at v.65.1, use `selected` instead.
@@ -134,6 +150,7 @@ export interface IDropdownOption extends ISelectableOption {
 
 /**
  * The props needed to construct styles. This represents the simplified set of immutable things which control the class names.
+ * {@docCategory Dropdown}
  */
 export type IDropdownStyleProps = Pick<IDropdownProps, 'theme' | 'className' | 'disabled' | 'required'> & {
   /**
@@ -171,6 +188,7 @@ export type IDropdownStyleProps = Pick<IDropdownProps, 'theme' | 'className' | '
 
 /**
  * Represents the stylable areas of the control.
+ * {@docCategory Dropdown}
  */
 export interface IDropdownStyles {
   /** Root element of the Dropdown (includes Label and the actual Dropdown). */
@@ -237,6 +255,9 @@ export interface IDropdownStyles {
   subComponentStyles: IDropdownSubComponentStyles;
 }
 
+/**
+ * {@docCategory Dropdown}
+ */
 export interface IDropdownSubComponentStyles {
   /** Refers to the panel that hosts the Dropdown options in small viewports. */
   panel: IStyleFunctionOrObject<IPanelStyleProps, any>;
