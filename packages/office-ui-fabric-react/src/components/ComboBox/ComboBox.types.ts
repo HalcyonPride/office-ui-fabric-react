@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { IIconProps } from '../../Icon';
 import { ISelectableOption } from '../../utilities/selectableOption/SelectableOption.types';
 import { ISelectableDroppableTextProps } from '../../utilities/selectableOption/SelectableDroppableText.types';
@@ -12,6 +13,11 @@ import { IAutofillProps } from '../pickers/AutoFill/BaseAutoFill.types';
  * {@docCategory ComboBox}
  */
 export interface IComboBox {
+  /**
+   * All selected options
+   */
+  readonly selectedOptions: IComboBoxOption[];
+
   /**
    * If there is a menu open this will dismiss the menu
    */
