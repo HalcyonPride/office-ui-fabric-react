@@ -14,13 +14,6 @@ const ButtonTheme = {
         }
       }
     },
-    Stack: {
-      styles: {
-        root: {
-          background: 'lightblue'
-        }
-      }
-    },
     Text: {
       styles: {
         root: {
@@ -33,7 +26,6 @@ const ButtonTheme = {
 
 const getButtonStyles: IButtonComponent['styles'] = {
   icon: ButtonTheme.scopedSettings.Icon.styles.root,
-  stack: ButtonTheme.scopedSettings.Stack.styles.root,
   content: ButtonTheme.scopedSettings.Text.styles.root
 };
 
@@ -48,7 +40,7 @@ export class SlotsStyledExample extends React.Component<{}, {}> {
           <Button icon="share" content={{ children: 'Text as ITextProps with styles', styles: ButtonTheme.scopedSettings.Text.styles }} />
           <Button icon={{ iconName: 'share', styles: { root: { color: 'red' } } }} styles={getButtonStyles} content="Button styles prop" />
           <Customizer {...ButtonTheme}>
-            <Button icon={{ iconName: 'share' }} content="Button scopedSettings" />
+            <Button icon="share" content="Button scopedSettings" />
           </Customizer>
         </Stack>
       </Stack>

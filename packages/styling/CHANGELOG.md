@@ -1,6 +1,46 @@
 # Change Log - @uifabric/styling
 
-This log was last generated on Wed, 05 Jun 2019 12:22:30 GMT and should not be manually modified.
+This log was last generated on Wed, 26 Jun 2019 12:23:41 GMT and should not be manually modified.
+
+## 7.0.3
+Wed, 26 Jun 2019 12:23:41 GMT
+
+### Patches
+
+- Add getPlaceholderStyles to return style object based on browser used
+
+## 7.0.2
+Fri, 14 Jun 2019 12:26:30 GMT
+
+### Patches
+
+- Fix missing assets in production build.
+
+## 7.0.1
+Thu, 13 Jun 2019 00:24:48 GMT
+
+### Patches
+
+- Initial release of Fabric 7
+
+## 6.49.0
+Wed, 12 Jun 2019 00:42:26 GMT
+
+### Minor changes
+
+- Remap existing font variables to new values.
+- Extend `getFocusStyle` to include named parameters.
+
+### Patches
+
+- Update and dedupe React deps.
+
+## 6.48.1
+Tue, 11 Jun 2019 12:21:35 GMT
+
+### Patches
+
+- upgrade to api-extractor 7.1.6
 
 ## 6.48.0
 Wed, 05 Jun 2019 12:22:30 GMT
