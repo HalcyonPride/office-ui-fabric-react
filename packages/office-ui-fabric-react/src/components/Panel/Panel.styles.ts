@@ -156,17 +156,7 @@ const commandBarHeight = '44px';
 
 const sharedPaddingStyles = {
   paddingLeft: '16px',
-  paddingRight: '16px',
-  selectors: {
-    [`@media screen and (min-width: ${ScreenWidthMinLarge}px)`]: {
-      paddingLeft: '32px',
-      paddingRight: '32px'
-    },
-    [`@media screen and (min-width: ${ScreenWidthMinXXLarge}px)`]: {
-      paddingLeft: '40px',
-      paddingRight: '40px'
-    }
-  }
+  paddingRight: '16px'
 };
 
 // // TODO -Issue #5689: Comment in once Button is converted to mergeStyles
@@ -193,6 +183,7 @@ export const getStyles = (props: IPanelStyleProps): IPanelStyles => {
     headerClassName,
     isAnimating,
     isFooterSticky,
+    isFooterAtBottom,
     isOnRightSide,
     isOpen,
     isHiddenOnDismiss,
@@ -325,7 +316,11 @@ export const getStyles = (props: IPanelStyleProps): IPanelStyles => {
         fontSize: 20, // TODO: after the type ramp gets reevaluated this needs to be changed
         fontWeight: FontWeights.semibold,
         lineHeight: '27px',
-        margin: 0
+        margin: 0,
+        overflowWrap: 'break-word',
+        wordWrap: 'break-word',
+        wordBreak: 'break-word',
+        hyphens: 'auto'
       },
       headerClassName
     ],
@@ -333,6 +328,9 @@ export const getStyles = (props: IPanelStyleProps): IPanelStyles => {
       classNames.scrollableContent,
       {
         overflowY: 'auto'
+      },
+      isFooterAtBottom && {
+        flexGrow: 1
       }
     ],
     content: [
@@ -347,7 +345,8 @@ export const getStyles = (props: IPanelStyleProps): IPanelStyles => {
       classNames.footer,
       {
         // Ensure that footer doesn't shrink if screen is too small
-        flexGrow: 0,
+        flexGrow: 1,
+        flexShrink: 0,
         borderTop: '1px solid transparent',
         transition: `opacity ${AnimationVariables.durationValue3} ${AnimationVariables.easeFunction2}`
       },

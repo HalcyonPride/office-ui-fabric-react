@@ -69,10 +69,6 @@ steps:
       githubDescription: 'Click "Details" to go to the Deployed Site'
       githubTargetLink: 'http://fabricweb.z5.web.core.windows.net/pr-deploy-site/$(Build.SourceBranch)/'
 
-  - script: |
-      npm run a11ytest
-    displayName: run a11y tests
-
   - task: PublishBuildArtifacts@1
     inputs:
       pathtoPublish: './apps/a11y-tests/dist/reports'
@@ -82,7 +78,7 @@ steps:
   - script: |
       git config --global user.email "fabrictactical@microsoft.com"
       git config --global user.name "Fabric Tactical"
-      npm run vrtest
+      npm run vrtest -- --debug
     displayName: run VR Test
     env:
       SCREENER_API_KEY: $(screener.key)

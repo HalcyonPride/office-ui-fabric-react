@@ -298,7 +298,7 @@ export class GroupedListSection extends BaseComponent<IGroupedListSectionProps, 
 
   private _onRenderGroup(renderCount: number): JSX.Element {
     const { group, items, onRenderCell, listProps, groupNestingDepth, onShouldVirtualize } = this.props;
-    const count = group ? group.count : items.length;
+    const count = group && !group.isShowingAll ? group.count : items.length;
     const startIndex = group ? group.startIndex : 0;
 
     return (
@@ -341,6 +341,8 @@ export class GroupedListSection extends BaseComponent<IGroupedListSectionProps, 
       compact
     } = this.props;
 
+    const nestingDepth = subGroup.level ? subGroup.level + 1 : groupNestingDepth;
+
     return !subGroup || subGroup.count > 0 || (groupProps && groupProps.showEmptyGroups) ? (
       <GroupedListSection
         ref={'subGroup_' + subGroupIndex}
@@ -352,7 +354,7 @@ export class GroupedListSection extends BaseComponent<IGroupedListSectionProps, 
         getGroupItemLimit={getGroupItemLimit}
         group={subGroup}
         groupIndex={subGroupIndex}
-        groupNestingDepth={groupNestingDepth}
+        groupNestingDepth={nestingDepth}
         groupProps={groupProps}
         headerProps={headerProps}
         items={items}
