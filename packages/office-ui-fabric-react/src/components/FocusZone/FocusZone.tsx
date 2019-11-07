@@ -23,7 +23,8 @@ import {
   shouldWrapFocus,
   warnDeprecations,
   portalContainsElement,
-  IPoint
+  IPoint,
+  getWindow
 } from '../../Utilities';
 import { mergeStyles } from '@uifabric/merge-styles';
 
@@ -61,6 +62,9 @@ const _allInstances: {
   [key: string]: FocusZone;
 } = {};
 const _outerZones: Set<FocusZone> = new Set();
+
+// Track the 1 global keydown listener we hook to window.
+let _disposeGlobalKeyDownListener: () => void | undefined;
 
 const ALLOWED_INPUT_TYPES = ['text', 'number', 'password', 'email', 'tel', 'url', 'search'];
 
@@ -135,11 +139,10 @@ export class FocusZone extends React.Component<IFocusZoneProps> implements IFocu
     _allInstances[this._id] = this;
 
     if (root) {
-      const windowElement = root.ownerDocument!.defaultView!;
-
+      const windowElement = getWindow(root);
       let parentElement = getParent(root, ALLOW_VIRTUAL_ELEMENTS);
 
-      while (parentElement && parentElement !== document.body && parentElement.nodeType === 1) {
+      while (parentElement && parentElement !== this._getDocument().body && parentElement.nodeType === 1) {
         if (isElementFocusZone(parentElement)) {
           this._isInnerZone = true;
           break;
@@ -152,7 +155,7 @@ export class FocusZone extends React.Component<IFocusZoneProps> implements IFocu
       }
 
       if (windowElement && _outerZones.size === 1) {
-        this._disposables.push(on(windowElement, 'keydown', this._onKeyDownCapture, true));
+        _disposeGlobalKeyDownListener = on(windowElement, 'keydown', this._onKeyDownCapture, true);
       }
       this._disposables.push(on(root, 'blur', this._onBlur, true));
 
@@ -160,7 +163,7 @@ export class FocusZone extends React.Component<IFocusZoneProps> implements IFocu
       this._updateTabIndexes();
 
       if (this.props.defaultActiveElement) {
-        this._activeElement = getDocument()!.querySelector(this.props.defaultActiveElement) as HTMLElement;
+        this._activeElement = this._getDocument().querySelector(this.props.defaultActiveElement) as HTMLElement;
         this.focus();
       }
     }
@@ -168,7 +171,7 @@ export class FocusZone extends React.Component<IFocusZoneProps> implements IFocu
 
   public componentDidUpdate(): void {
     const { current: root } = this._root;
-    const doc = getDocument(root);
+    const doc = this._getDocument();
 
     if (doc && this._lastIndexPath && (doc.activeElement === doc.body || doc.activeElement === root)) {
       // The element has been removed after the render, attempt to restore focus.
@@ -195,6 +198,11 @@ export class FocusZone extends React.Component<IFocusZoneProps> implements IFocu
 
     // Dispose all events.
     this._disposables.forEach(d => d());
+
+    // If this is the last outer zone, remove the keydown listener.
+    if (_outerZones.size === 0 && _disposeGlobalKeyDownListener) {
+      _disposeGlobalKeyDownListener();
+    }
   }
 
   public render() {
@@ -212,7 +220,6 @@ export class FocusZone extends React.Component<IFocusZoneProps> implements IFocu
 
     return (
       <Tag
-        role="presentation"
         aria-labelledby={ariaLabelledBy}
         aria-describedby={ariaDescribedBy}
         {...divProps}
@@ -310,16 +317,15 @@ export class FocusZone extends React.Component<IFocusZoneProps> implements IFocu
 
   private _evaluateFocusBeforeRender(): void {
     const { current: root } = this._root;
-    const doc = getDocument(root);
 
+    const doc = this._getDocument();
     if (doc) {
       const focusedElement = doc.activeElement as HTMLElement;
 
       // Only update the index path if we are not parked on the root.
       if (focusedElement !== root) {
         const shouldRestoreFocus = elementContains(root, focusedElement, false);
-
-        this._lastIndexPath = shouldRestoreFocus ? getElementIndexPath(root as HTMLElement, doc.activeElement as HTMLElement) : undefined;
+        this._lastIndexPath = shouldRestoreFocus ? getElementIndexPath(root as HTMLElement, focusedElement) : undefined;
       }
     }
   }
@@ -501,7 +507,7 @@ export class FocusZone extends React.Component<IFocusZoneProps> implements IFocu
       return;
     }
 
-    if (document.activeElement === this._root.current && this._isInnerZone) {
+    if (this._getDocument().activeElement === this._root.current && this._isInnerZone) {
       // If this element has focus, it is being controlled by a parent.
       // Ignore the keystroke.
       return;
@@ -949,7 +955,7 @@ export class FocusZone extends React.Component<IFocusZoneProps> implements IFocu
   private _getOwnerZone(element?: HTMLElement): HTMLElement | null {
     let parentElement = getParent(element as HTMLElement, ALLOW_VIRTUAL_ELEMENTS);
 
-    while (parentElement && parentElement !== this._root.current && parentElement !== document.body) {
+    while (parentElement && parentElement !== this._root.current && parentElement !== this._getDocument().body) {
       if (isElementFocusZone(parentElement)) {
         return parentElement;
       }
@@ -1060,5 +1066,9 @@ export class FocusZone extends React.Component<IFocusZoneProps> implements IFocu
    */
   private _portalContainsElement(element: HTMLElement): boolean {
     return element && !!this._root.current && portalContainsElement(element, this._root.current);
+  }
+
+  private _getDocument(): Document {
+    return getDocument(this._root.current)!;
   }
 }

@@ -4,10 +4,6 @@ import { DetailsListBasicExample } from 'office-ui-fabric-react/lib/components/D
 import { mergeStyles } from 'office-ui-fabric-react/lib/Styling';
 import { AppCustomizations } from './customizations/customizations';
 
-export interface IReferencesList {
-  pages: string[];
-}
-
 const propertiesTableMargins = mergeStyles({
   marginLeft: '40px',
   marginRight: '40px'
@@ -71,6 +67,12 @@ export const AppDefinition: IAppDefinition = {
           key: 'Callout',
           name: 'Callout',
           url: '#/examples/callout'
+        },
+        {
+          component: require<any>('./components/pages/CardPage').CardPage,
+          key: 'Card',
+          name: 'Card',
+          url: '#/examples/card'
         },
         {
           component: require<any>('./components/pages/CheckboxPage').CheckboxPage,
@@ -570,11 +572,11 @@ export const AppDefinition: IAppDefinition = {
     },
     {
       name: 'Fabric',
-      url: 'http://dev.office.com/fabric'
+      url: 'https://dev.microsoft.com/fabric'
     },
     {
-      name: 'Github',
-      url: 'http://www.github.com/officedev'
+      name: 'GitHub',
+      url: 'https://github.com/OfficeDev/office-ui-fabric-react'
     }
   ]
 };

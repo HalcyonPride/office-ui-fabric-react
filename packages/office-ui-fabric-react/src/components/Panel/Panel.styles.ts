@@ -2,7 +2,6 @@ import { IPanelStyleProps, IPanelStyles, PanelType } from './Panel.types';
 import {
   AnimationClassNames,
   AnimationVariables,
-  DefaultFontStyles,
   getGlobalClassNames,
   HighContrastSelector,
   ScreenWidthMinMedium,
@@ -12,7 +11,6 @@ import {
   ScreenWidthMinUhfMobile,
   IStyle
 } from '../../Styling';
-import { FontWeights } from '../../Styling';
 
 // TODO -Issue #5689: Comment in once Button is converted to mergeStyles
 // import { IStyleFunctionOrObject } from '../../Utilities';
@@ -190,7 +188,7 @@ export const getStyles = (props: IPanelStyleProps): IPanelStyles => {
     theme,
     type = PanelType.smallFixedFar
   } = props;
-  const { palette, effects } = theme;
+  const { effects, fonts, semanticColors } = theme;
   const classNames = getGlobalClassNames(GlobalClassNames, theme);
   const isCustomPanel = type === PanelType.custom || type === PanelType.customNear;
 
@@ -230,7 +228,7 @@ export const getStyles = (props: IPanelStyleProps): IPanelStyles => {
     main: [
       classNames.main,
       {
-        backgroundColor: palette.white,
+        backgroundColor: semanticColors.bodyBackground,
         boxShadow: effects.elevation64,
         pointerEvents: 'auto',
         position: 'absolute',
@@ -247,8 +245,8 @@ export const getStyles = (props: IPanelStyleProps): IPanelStyles => {
         width: panelWidth.full,
         selectors: {
           [HighContrastSelector]: {
-            borderLeft: `3px solid ${palette.neutralLight}`,
-            borderRight: `3px solid ${palette.neutralLight}`
+            borderLeft: `3px solid ${semanticColors.variantBorder}`,
+            borderRight: `3px solid ${semanticColors.variantBorder}`
           },
           ...getPanelBreakpoints(type)
         }
@@ -310,11 +308,9 @@ export const getStyles = (props: IPanelStyleProps): IPanelStyles => {
     ],
     headerText: [
       classNames.headerText,
-      DefaultFontStyles.xLarge,
+      fonts.xLarge,
       {
-        color: palette.neutralPrimary,
-        fontSize: 20, // TODO: after the type ramp gets reevaluated this needs to be changed
-        fontWeight: FontWeights.semibold,
+        color: semanticColors.bodyText,
         lineHeight: '27px',
         margin: 0,
         overflowWrap: 'break-word',
@@ -350,8 +346,8 @@ export const getStyles = (props: IPanelStyleProps): IPanelStyles => {
         transition: `opacity ${AnimationVariables.durationValue3} ${AnimationVariables.easeFunction2}`
       },
       isFooterSticky && {
-        background: palette.white,
-        borderTopColor: palette.neutralLight
+        background: semanticColors.bodyBackground,
+        borderTopColor: semanticColors.variantBorder
       }
     ],
     footerInner: [

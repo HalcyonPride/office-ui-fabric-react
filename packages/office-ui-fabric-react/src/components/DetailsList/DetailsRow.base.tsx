@@ -137,7 +137,8 @@ export class DetailsRowBase extends React.Component<IDetailsRowBaseProps, IDetai
     this._events.dispose();
   }
 
-  public componentWillReceiveProps(newProps: IDetailsRowBaseProps): void {
+  // tslint:disable-next-line function-name
+  public UNSAFE_componentWillReceiveProps(newProps: IDetailsRowBaseProps): void {
     this.setState({
       selectionState: this._getSelectionState(newProps)
     });
@@ -149,7 +150,7 @@ export class DetailsRowBase extends React.Component<IDetailsRowBaseProps, IDetai
       if (this.state.selectionState.isSelected !== newSelectionState.isSelected) {
         return true;
       }
-      return shallowCompare(this.props, nextProps);
+      return !shallowCompare(this.props, nextProps);
     } else {
       return true;
     }
@@ -182,7 +183,8 @@ export class DetailsRowBase extends React.Component<IDetailsRowBaseProps, IDetai
       theme,
       styles,
       cellsByColumn,
-      groupNestingDepth
+      groupNestingDepth,
+      useFastIcons = true
     } = this.props;
     const { columnMeasureInfo, isDropping } = this.state;
     const { isSelected = false, isSelectionModal = false } = this.state.selectionState;
@@ -244,6 +246,7 @@ export class DetailsRowBase extends React.Component<IDetailsRowBaseProps, IDetai
 
     return (
       <FocusZone
+        data-is-focusable={true}
         {...getNativeProps(this.props, divProperties)}
         {...(typeof isDraggable === 'boolean'
           ? {
@@ -258,7 +261,6 @@ export class DetailsRowBase extends React.Component<IDetailsRowBaseProps, IDetai
         aria-label={ariaLabel}
         aria-describedby={ariaDescribedBy}
         className={this._classNames.root}
-        data-is-focusable={true}
         data-selection-index={itemIndex}
         data-item-index={itemIndex}
         aria-rowindex={itemIndex + 1}
@@ -278,7 +280,8 @@ export class DetailsRowBase extends React.Component<IDetailsRowBaseProps, IDetai
               className: this._classNames.check,
               theme,
               isVisible: checkboxVisibility === CheckboxVisibility.always,
-              onRenderDetailsCheckbox: onRenderDetailsCheckbox
+              onRenderDetailsCheckbox: onRenderDetailsCheckbox,
+              useFastIcons
             })}
           </div>
         )}
