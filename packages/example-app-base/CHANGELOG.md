@@ -1,7 +1,38 @@
 # Change Log - @uifabric/example-app-base
 
-This log was last generated on Wed, 06 Nov 2019 12:34:07 GMT and should not be manually modified.
+This log was last generated on Mon, 23 Dec 2019 12:34:01 GMT and should not be manually modified.
 
+## 7.10.4
+Mon, 23 Dec 2019 12:34:01 GMT
+
+### Patches
+
+- Fix Link colors inside MessageBar (elcraig@microsoft.com)
+## 7.10.3
+Fri, 13 Dec 2019 12:30:51 GMT
+
+### Patches
+
+- Add missing aria labels on example card dropdowns (elcraig@microsoft.com)
+## 7.10.2
+Thu, 28 Nov 2019 12:32:23 GMT
+
+### Patches
+
+- Update fabric core dependency in other package.json files (v-mare@microsoft.com)
+## 7.10.1
+Wed, 13 Nov 2019 12:33:43 GMT
+
+### Patches
+
+- PlatformPicker: High Contrast support (jdh@microsoft.com)
+- Fix API reference links (elcraig@microsoft.com)
+## 7.10.0
+Tue, 12 Nov 2019 12:32:39 GMT
+
+### Minor changes
+
+- API doc table refactor (elcraig@microsoft.com)
 ## 7.9.0
 Wed, 06 Nov 2019 12:34:07 GMT
 

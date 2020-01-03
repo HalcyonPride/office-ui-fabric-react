@@ -37,6 +37,7 @@ export class TooltipHostBase extends React.Component<ITooltipHostProps, ITooltip
   private _async: Async;
   private _dismissTimerId: number;
   private _openTimerId: number;
+  private _defaultTooltipId = getId('tooltip');
 
   // Constructor
   constructor(props: ITooltipHostProps) {
@@ -74,7 +75,7 @@ export class TooltipHostBase extends React.Component<ITooltipHostProps, ITooltip
     });
 
     const { isAriaPlaceholderRendered, isTooltipVisible } = this.state;
-    const tooltipId = id || getId('tooltip');
+    const tooltipId = id || this._defaultTooltipId;
     const isContentPresent = !!(content || (tooltipProps && tooltipProps.onRenderContent && tooltipProps.onRenderContent()));
     const showTooltip = isTooltipVisible && isContentPresent;
     const ariaDescribedBy = setAriaDescribedBy && isTooltipVisible && isContentPresent ? tooltipId : undefined;
@@ -229,6 +230,8 @@ export class TooltipHostBase extends React.Component<ITooltipHostProps, ITooltip
 
   // Hide Tooltip
   private _hideTooltip = (): void => {
+    this._clearOpenTimer();
+    this._clearDismissTimer();
     this._toggleTooltip(false);
   };
 
@@ -236,7 +239,7 @@ export class TooltipHostBase extends React.Component<ITooltipHostProps, ITooltip
     if (this.state.isTooltipVisible !== isTooltipVisible) {
       this.setState(
         { isAriaPlaceholderRendered: false, isTooltipVisible },
-        () => this.props.onTooltipToggle && this.props.onTooltipToggle(this.state.isTooltipVisible)
+        () => this.props.onTooltipToggle && this.props.onTooltipToggle(isTooltipVisible)
       );
     }
   };

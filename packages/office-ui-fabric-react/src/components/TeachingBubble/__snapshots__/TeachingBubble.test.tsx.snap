@@ -317,6 +317,9 @@ exports[`TeachingBubble renders TeachingBubbleContent with buttons correctly 1`]
         className=
             ms-TeachingBubble-header
             ms-TeachingBubble-header--large
+            {
+              margin-right: 24px;
+            }
             &:not(:last-child) {
               margin-bottom: 14px;
             }
@@ -568,7 +571,7 @@ exports[`TeachingBubble renders TeachingBubbleContent with buttons correctly 1`]
                   background-color: #ffffff;
                   border-color: #ffffff;
                   border-radius: 2px;
-                  border: none;
+                  border: 1px solid #0078d4;
                   box-sizing: border-box;
                   color: #0078d4;
                   cursor: pointer;
@@ -621,15 +624,18 @@ exports[`TeachingBubble renders TeachingBubbleContent with buttons correctly 1`]
                 @media screen and (-ms-high-contrast: active){& {
                   -ms-high-contrast-adjust: none;
                   background-color: WindowText;
+                  border-color: WindowText;
                   color: Window;
                 }
                 &:hover {
                   background-color: #deecf9;
                   border-color: #deecf9;
+                  border: 1px solid #106ebe;
                   color: #0078d4;
                 }
                 @media screen and (-ms-high-contrast: active){&:hover {
                   background-color: Highlight;
+                  border-color: Highlight;
                   color: Window;
                 }
                 &:focus {
@@ -639,11 +645,13 @@ exports[`TeachingBubble renders TeachingBubbleContent with buttons correctly 1`]
                 &:active {
                   background-color: #ffffff;
                   border-color: #ffffff;
+                  border: 1px solid #005a9e;
                   color: #0078d4;
                 }
                 @media screen and (-ms-high-contrast: active){&:active {
                   -ms-high-contrast-adjust: none;
                   background-color: WindowText;
+                  border-color: WindowText;
                   color: Window;
                 }
                 & .ms-Button-label {
@@ -776,6 +784,9 @@ exports[`TeachingBubble renders TeachingBubbleContent with buttons correctly 1`]
               border-color: Highlight;
               color: Highlight;
             }
+            &:focus {
+              border: 1px solid #edebe9;
+            }
             &:active {
               background-color: #edebe9;
               background: #005a9e;
@@ -832,6 +843,11 @@ exports[`TeachingBubble renders TeachingBubbleContent with buttons correctly 1`]
                 }
             data-icon-name="Cancel"
             role="presentation"
+            style={
+              Object {
+                "fontFamily": "\\"FabricMDL2Icons\\"",
+              }
+            }
           >
             
           </i>
@@ -909,7 +925,6 @@ exports[`TeachingBubble renders TeachingBubbleContent with condensed headline co
               font-size: 14px;
               font-weight: 600;
               margin-bottom: 14px;
-              margin-right: 24px;
             }
       >
         <p
@@ -1318,7 +1333,6 @@ exports[`TeachingBubble renders TeachingBubbleContent with small headline correc
               font-family: 'Segoe UI', 'Segoe UI Web (West European)', 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', 'Helvetica Neue', sans-serif;
               font-size: 14px;
               font-weight: 600;
-              margin-right: 24px;
             }
             &:not(:last-child) {
               margin-bottom: 14px;

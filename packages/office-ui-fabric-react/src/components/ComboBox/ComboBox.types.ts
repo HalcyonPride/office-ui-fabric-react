@@ -183,6 +183,11 @@ export interface IComboBoxProps extends ISelectableDroppableTextProps<IComboBox,
   scrollSelectedToTop?: boolean;
 
   /**
+   * Add additional content above the callout list.
+   */
+  onRenderUpperContent?: IRenderFunction<IComboBoxProps>;
+
+  /**
    * Add additional content below the callout list.
    */
   onRenderLowerContent?: IRenderFunction<IComboBoxProps>;
@@ -342,6 +347,11 @@ export interface IComboBoxStyles {
    * Styles for a divider in the options.
    */
   divider: IStyle;
+
+  /**
+   * Styles for hidden screen reader text.
+   */
+  screenReaderText: IStyle;
 }
 
 /**

@@ -92,7 +92,12 @@ export function getStyles(props: ISearchBoxStyleProps): ISearchBoxStyles {
           borderColor: inputBorderDisabled,
           backgroundColor: inputBackgroundDisabled,
           pointerEvents: 'none',
-          cursor: 'default'
+          cursor: 'default',
+          selectors: {
+            [HighContrastSelector]: {
+              borderColor: 'GrayText'
+            }
+          }
         }
       ],
       underlined && [
@@ -165,7 +170,7 @@ export function getStyles(props: ISearchBoxStyleProps): ISearchBoxStyles {
             color: inputIconAltHovered
           },
           '.ms-Button': {
-            borderRadius: getRTL() ? '1px 0 0 1px' : '0 1px 1px 0'
+            borderRadius: getRTL(theme) ? '1px 0 0 1px' : '0 1px 1px 0'
           },
           '.ms-Button-icon': {
             color: inputIconAlt
